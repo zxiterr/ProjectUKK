@@ -58,10 +58,6 @@
         text-decoration: none;
     }
 
-    .btn-edit:hover {
-        background: #3600a8;
-    }
-
     .btn-delete {
         background: #ff4d4f;
         color: white;
@@ -74,10 +70,6 @@
         align-items: center;
         gap: 6px;
     }
-
-    .btn-delete:hover {
-        background: #e04344;
-    }
 </style>
 @endsection
 
@@ -85,10 +77,6 @@
 @section('content')
 
 <h2 class="mb-4" style="color:#293ceb;">Kelola Produk</h2>
-
-<a href="{{ route('products.create') }}" class="btn-primary-custom">
-    + Tambah Produk
-</a>
 
 <div class="card mt-3" style="border-radius:14px; overflow:hidden;">
     <div class="card-header" style="
@@ -103,8 +91,8 @@
                 <tr>
                     <th>Nama</th>
                     <th>Harga</th>
+                    <th>Kategori</th>   <!-- DITAMBAHKAN -->
                     <th>Gambar</th>
-                    <th style="width:150px;">Aksi</th>
                 </tr>
             </thead>
 
@@ -113,33 +101,22 @@
                 <tr>
                     <td>{{ $product->name }}</td>
                     <td>Rp {{ number_format($product->price) }}</td>
+
+                    {{-- KATEGORI --}}
+                    <td>
+                        @if($product->category)
+                            {{ $product->category->name }}
+                        @else
+                            <span style="color:#888;">Tidak ada kategori</span>
+                        @endif
+                    </td>
+
                     <td>
                         @if($product->image)
                             <img src="/uploads/products/{{ $product->image }}" width="60" style="border-radius:8px;">
                         @else
                             -
                         @endif
-                    </td>
-                    <td>
-                        <div style="display:flex; gap:10px;">
-
-
-                            <a href="{{ route('products.edit', $product->id) }}"
-                                class="btn-edit">
-                                <i class="fa fa-edit"></i>
-                            </a>
-
-
-                            <form action="{{ route('products.destroy', $product->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn-delete"
-                                    onclick="return confirm('Hapus produk ini?')">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </form>
-
-                        </div>
                     </td>
                 </tr>
 

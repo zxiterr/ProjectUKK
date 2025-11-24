@@ -40,33 +40,34 @@ class AuthController extends Controller
 
 
     public function showRegister()
-    {
-        return view('auth.register');
-    }
+{
+    return view('auth.register');
+}
 
-    public function register(Request $request)
-    {
-        $request->validate([
-            'name'      => 'required|string|max:255',
-            'username'  => 'required|string|max:255|unique:users',
-            'password'  => 'required|min:1|confirmed',
-        ]);
+public function register(Request $request)
+{
+    $request->validate([
+        'name'      => 'required|string|max:255',
+        'username'  => 'required|string|max:255|unique:users,username',
+        'password'  => 'required|min:6|confirmed',
+    ]);
 
-        User::create([
-            'name'      => $request->name,
-            'username'  => $request->username,
-            'password'  => Hash::make($request->password),
-        ]);
+    User::create([
+        'name'      => $request->name,
+        'username'  => $request->username,
+        'password'  => Hash::make($request->password),
+        'role'      => 'member',  
+    ]);
 
-        return redirect('/login')->with('success', 'Registrasi berhasil! Silakan login.');
-    }
+    return redirect('/login')->with('success', 'Registrasi berhasil! Silakan login.');
+}
 
+public function logout(Request $request)
+{
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
 
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect('/login');
-    }
+    return redirect('/login');
+}
 }

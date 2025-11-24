@@ -108,11 +108,6 @@
 
 </div>
 
-<div class="section">
-    <h2>Produk Terbaru</h2>
-
-   
-</div>
 
 @endsection
 

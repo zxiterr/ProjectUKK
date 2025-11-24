@@ -1,65 +1,121 @@
 <?php
 
-namespace App\Http\Controllers\Member;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class MemberProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan semua produk milik member yang sedang login
      */
     public function index()
     {
-        //
+       $products = Product::where('user_id', auth()->id())
+                ->with('category')
+                ->get();
+
+    return view('member.products.index', compact('products'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Form tambah produk
      */
     public function create()
     {
-        //
+         $categories = Category::all();
+         return view('member.products.create', compact('categories'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Simpan produk baru
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'        => 'required',
+            'price'       => 'required|numeric',
+            'description' => 'nullable',
+            'image'       => 'nullable|image',
+        ]);
+
+        $filename = null;
+
+        if ($request->image) {
+            $filename = time() . '_' . $request->image->getClientOriginalName();
+            $request->image->move(public_path('uploads/products'), $filename);
+        }
+
+        Product::create([
+            'user_id'     => auth()->id(),
+            'name'        => $request->name,
+            'price'       => $request->price,
+            'description' => $request->description,
+            'image'       => $filename,
+        ]);
+
+        return redirect()
+            ->route('member.products.index')
+            ->with('success', 'Produk berhasil ditambahkan!');
     }
 
     /**
-     * Display the specified resource.
+     * Form edit produk
      */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+    // Ambil semua kategori
+    $categories = Category::all();
+
+    return view('member.products.edit', compact('product', 'categories'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Update produk
      */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+       $product = Product::findOrFail($id);
+
+    $product->name = $request->name;
+    $product->price = $request->price;
+    $product->description = $request->description;
+    $product->category_id = $request->category_id;
+
+    // Jika upload foto baru
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('products', 'public');
+        $product->image = $imagePath;
+    }
+
+    $product->save();
+
+    return redirect()->route('member.products.index')
+        ->with('success', 'Produk berhasil diperbarui!');
     }
 
     /**
-     * Update the specified resource in storage.
+     * Hapus produk
      */
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
-        //
-    }
+        $product = Product::where('user_id', auth()->id())->findOrFail($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        // Hapus gambar dari folder jika ada
+        $imagePath = public_path('products/' . $product->image);
+
+        if ($product->image && file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
+        $product->delete();
+
+        return redirect()
+            ->route('member.products.index')
+            ->with('success', 'Produk berhasil dihapus!');
     }
 }

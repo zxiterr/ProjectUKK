@@ -112,12 +112,12 @@
     </a>
 
     <a href="/member/products">
-        <i class="fa fa-bag-shopping"></i> Lihat Produk
-    </a>
+    <i class="fa fa-bag-shopping"></i> Produk Saya
+</a>
 
-    <a href="/member/riwayat-belanja">
-        <i class="fa fa-receipt"></i> Riwayat Belanja
-    </a>
+<a href="/member/products/create">
+    <i class="fa fa-plus-circle"></i> Tambah Produk
+</a>
 
     <a href="/tentang-kami">
         <i class="fa fa-info-circle"></i> Tentang Kami

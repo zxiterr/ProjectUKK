@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\MemberProductController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
@@ -10,13 +12,30 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TentangKamiController;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\MemberDashboardController;
+use App\Models\Product;
 
-
-
-
+// ===============================
+// BERANDA
+// ===============================
 Route::get('/', function () {
-    return view('beranda');
+    $products = Product::latest()->get();
+    $categories = Category::all();
+
+    return view('beranda', compact('products', 'categories'));
+
+
 });
+
+Route::get('/category/{id}', function ($id) {
+    $products = Product::where('category_id', $id)->latest()->get();
+    $category = \App\Models\Category::findOrFail($id);
+
+    return view('beranda-category', compact('products', 'category'));
+})->name('beranda.category');
+
+
+
+
 
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -31,8 +50,6 @@ Route::get('/tentang-kami', [TentangKamiController::class, 'index'])->name('tent
 Route::post('/tentang-kami/save', [TentangKamiController::class, 'save'])->name('tentang-kami.save');
 
 
-
-
 Route::get('/admin', function () {
 
     if (!auth()->check()) {
@@ -44,16 +61,14 @@ Route::get('/admin', function () {
     }
 
     return app(AdminController::class)->index();
-
 });
-
-
 
 
 Route::prefix('admin')->middleware('auth')->group(function () {
 
 
-    Route::resource('products', ProductController::class);
+    Route::resource('products', ProductController::class)
+        ->only(['index', 'show', 'edit', 'update', 'destroy']);
 
 
     Route::get('/users', [AdminUserController::class, 'index']);
@@ -64,21 +79,39 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::delete('/users/{id}', [AdminUserController::class, 'destroy']);
 
 
+    Route::resource('categories', CategoryController::class);
+
+
     Route::get('/toko', [TokoController::class, 'index'])->name('toko.index');
     Route::get('/toko/create', [TokoController::class, 'create'])->name('toko.create');
     Route::post('/toko', [TokoController::class, 'store'])->name('toko.store');
     Route::get('/toko/{id}/edit', [TokoController::class, 'edit'])->name('toko.edit');
     Route::put('/toko/{id}', [TokoController::class, 'update'])->name('toko.update');
     Route::delete('/toko/{id}', [TokoController::class, 'destroy'])->name('toko.destroy');
-
-
-    Route::resource('categories', CategoryController::class);
 });
 
 
-
-
 Route::middleware(['auth', 'isMember'])->group(function () {
+
+
+    Route::get('/member/products', [MemberProductController::class, 'index'])
+        ->name('member.products.index');
+
+
+    Route::get('/member/products/create', [MemberProductController::class, 'create'])
+        ->name('member.products.create');
+    Route::post('/member/products', [MemberProductController::class, 'store'])
+        ->name('member.products.store');
+
+
+    Route::get('/member/products/{id}/edit', [MemberProductController::class, 'edit'])
+        ->name('member.products.edit');
+    Route::put('/member/products/{id}', [MemberProductController::class, 'update'])
+        ->name('member.products.update');
+
+
+    Route::delete('/member/products/{id}', [MemberProductController::class, 'destroy'])
+        ->name('member.products.destroy');
 
 
     Route::get('/member/dashboard', [MemberDashboardController::class, 'index'])
@@ -87,6 +120,5 @@ Route::middleware(['auth', 'isMember'])->group(function () {
 
     Route::get('/member/riwayat-belanja', [MemberDashboardController::class, 'riwayatBelanja'])
         ->name('member.riwayat');
-
-
 });
+
