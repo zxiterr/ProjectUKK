@@ -36,7 +36,7 @@ class AdminUserController extends Controller
 
         User::create([
             'name' => $request->name,
-            'email' => $request->email,
+            'username' => $request->username,
             'password' => bcrypt($request->password),
             'role' => $request->role,
         ]);
@@ -60,7 +60,7 @@ class AdminUserController extends Controller
 
         $user->update([
             'name' => $request->name,
-            'email' => $request->email,
+            'username' => $request->username,
             'role' => $request->role,
         ]);
 

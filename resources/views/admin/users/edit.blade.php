@@ -24,10 +24,10 @@
 
 
             <div class="mb-3">
-                <label class="form-label">Email</label>
+                <label class="form-label">Username</label>
                 <input
-                    type="email"
-                    name="email"
+                    type="username"
+                    name="username"
                     value="{{ $user->email }}"
                     class="form-control"
                     required>
@@ -48,13 +48,13 @@
                 <label class="form-label">Role</label>
                 <select name="role" class="form-select">
                     <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
-                    <option value="user"  {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
+                    <option value="user"  {{ $user->role == 'user' ? 'selected' : '' }}>Member</option>
                 </select>
             </div>
 
-           
-            <button type="submit" class="btn btn-warning">Update</button>
-            <a href="/admin/users" class="btn btn-secondary">Kembali</a>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="/admin/users" class="btn btn-danger">Kembali</a>
 
         </form>
 

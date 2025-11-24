@@ -5,6 +5,7 @@
 
 <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
+
     <div class="mb-3">
         <label>Nama Produk</label>
         <input type="text" name="name" class="form-control" required>
@@ -25,6 +26,9 @@
         <input type="file" name="image" class="form-control">
     </div>
 
-    <button class="btn btn-primary">Simpan</button>
+    <div class="d-flex gap-2 mt-3">
+        <button type="submit" class="btn btn-primary">Simpan</button>
+        <a href="{{ route('products.index') }}" class="btn btn-danger">Kembali</a>
+    </div>
 </form>
 @endsection

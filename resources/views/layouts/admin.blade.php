@@ -2,95 +2,124 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Marketplace</title>
+    <title>Admin Marketz</title>
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
-    <!-- Sidebar Style -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
         body {
-            background-color: #f4f6fa;
+            margin: 0;
+            background: #f5f5f7;
+            font-family: 'Segoe UI', sans-serif;
         }
 
+
         .sidebar {
-            width: 230px;
-            background: #1f2937;   /* dark gray */
-            height: 100vh;
-            padding: 20px 20px;
             position: fixed;
+            top: 0;
+            left: 0;
+            width: 240px;
+            height: 100vh;
+            background: linear-gradient(180deg, #4a00e0, #8e2de2);
             color: white;
+            padding: 25px 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .sidebar h2 {
+            font-size: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
         }
 
         .sidebar a {
-            display: block;
-            padding: 12px 20px;
-            color: #d1d5db;  /* gray-300 */
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            color: white;
             text-decoration: none;
-            margin-bottom: 5px;
-            border-radius: 5px;
+            margin-bottom: 8px;
+            border-radius: 10px;
+            transition: 0.2s;
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .sidebar a i {
+            font-size: 18px;
+            width: 22px;
         }
 
         .sidebar a:hover {
-            background: #374151;  /* gray-700 */
-            color: #fff;
+            background: rgba(255,255,255,0.2);
         }
 
-        .content {
-            margin-left: 250px;
-            padding: 25px;
+        /* CONTENT WRAPPER */
+        .admin-content {
+            margin-left: 260px;
+            padding: 35px;
+            max-width: 1200px;
         }
 
-        thead {
-            background: #1f2937 !important;
-            color: white !important;
+        /* LOGOUT BUTTON */
+        #logout-form button {
+            width: 100%;
+            border-radius: 8px;
+            padding: 10px;
+            font-weight: 600;
+            background: #ff4d4d;
+            border: none;
         }
-
-        .btn-primary {
-            background: #1f2937 !important;
-            border-color: #1f2937 !important;
-        }
-
-        .btn-primary:hover {
-            background: #374151 !important;
-            border-color: #374151 !important;
-        }
-
-        .card-custom {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            color: #111827;
+        #logout-form button:hover {
+            background: #e04444;
         }
     </style>
+
+    @yield('style')
 </head>
 
 <body>
 
-    <!-- Sidebar -->
+    <!-- SIDEBAR -->
     <div class="sidebar">
-        <a href="/admin">Dashboard</a>
-        <a href="/admin/users">Kelola User</a>
-        <a href="/admin/products">Kelola Produk</a>
-        <a href="/admin/toko">Kelola Toko</a>
+        <h2>Admin Marketz</h2>
 
-        <form action="{{ route('logout') }}" method="POST" style="margin-top: 15px;">
+        <a href="/admin">
+            <i class="fa fa-home"></i> Dashboard
+        </a>
+
+        <a href="/admin/users">
+            <i class="fa fa-users"></i> User
+        </a>
+
+        <a href="/admin/products">
+            <i class="fa fa-box"></i> Produk
+        </a>
+
+        <a href="/admin/toko">
+            <i class="fa fa-store"></i> Toko
+        </a>
+
+         <a href="/admin/categories">
+            <i class="fa-solid fa-icons"></i> Category
+        </a>
+
+        <form id="logout-form" action="/logout" method="POST" class="mt-4">
             @csrf
-            <button type="submit" class="btn btn-danger w-100">
-                Logout
-            </button>
+            <button type="submit">Logout</button>
         </form>
     </div>
 
-    <!-- Content -->
-    <div class="content">
+    <!-- MAIN CONTENT -->
+    <div class="admin-content">
         @yield('content')
     </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

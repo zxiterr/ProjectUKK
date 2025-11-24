@@ -11,7 +11,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+
+        // Register Middleware disini
+        $middleware->alias([
+            'isMember' => \App\Http\Middleware\IsMember::class,
+        ]);
+
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

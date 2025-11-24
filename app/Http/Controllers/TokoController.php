@@ -22,8 +22,8 @@ class TokoController extends Controller
     {
         $request->validate([
             'nama_toko' => 'required',
-            'alamat' => 'required',
             'pemilik' => 'required',
+            'deskripsi' => 'required',
         ]);
 
         Toko::create($request->all());
@@ -43,8 +43,8 @@ class TokoController extends Controller
 
         $request->validate([
             'nama_toko' => 'required',
-            'alamat' => 'required',
             'pemilik' => 'required',
+            'deskripsi' => 'required',
         ]);
 
         $toko->update($request->all());

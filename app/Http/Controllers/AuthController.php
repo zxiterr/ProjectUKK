@@ -2,58 +2,71 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    //
-    // Tampilkan halaman login
+
     public function showLogin()
     {
         return view('auth.login');
     }
 
-    // Proses login
     public function login(Request $request)
     {
-        // Validasi
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
+        $credentials = $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
         ]);
 
-        // Ambil data input
-        $credentials = $request->only('email', 'password');
-
-        // Coba login
-        if (Auth::attempt($credentials)) {
-
-            // Regenerate session
+        if (Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password']])) {
             $request->session()->regenerate();
 
-            // Bila admin, masuk dashboard admin
-            if (Auth::user()->role === 'admin') {
-                return redirect('/admin');
-            }
 
-            // Bila user biasa
-            return redirect('/dashboard');
+            if (auth()->user()->role === 'admin') {
+                return redirect()->intended('/admin');
+            } else {
+                return redirect()->intended('/member/dashboard');
+            }
         }
 
-        // Jika gagal
         return back()->withErrors([
-            'email' => 'Email atau password salah!',
-        ]);
+            'username' => 'Username atau password salah!',
+        ])->onlyInput('username');
     }
 
-    // Logout
+
+    public function showRegister()
+    {
+        return view('auth.register');
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name'      => 'required|string|max:255',
+            'username'  => 'required|string|max:255|unique:users',
+            'password'  => 'required|min:1|confirmed',
+        ]);
+
+        User::create([
+            'name'      => $request->name,
+            'username'  => $request->username,
+            'password'  => Hash::make($request->password),
+        ]);
+
+        return redirect('/login')->with('success', 'Registrasi berhasil! Silakan login.');
+    }
+
+
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
         return redirect('/login');
     }
 }

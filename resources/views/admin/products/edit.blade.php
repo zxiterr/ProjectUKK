@@ -30,7 +30,9 @@
         <input type="file" name="image" class="form-control mt-2">
     </div>
 
-    <button class="btn btn-primary">Update</button>
+    <div class="d-flex gap-2 mt-3">
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{{ route('products.index') }}" class="btn btn-danger">Kembali</a>
+    </div>
 </form>
-
 @endsection

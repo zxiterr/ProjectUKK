@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Toko;
 use App\Models\User;
@@ -15,9 +16,10 @@ class AdminController extends Controller
         $totalUsers = User::count();
         $totalProducts = Product::count();
         $totalToko = Toko::count();
+        $totalKategori = Category::count();
 
         $latestProducts = Product::latest()->take(5)->get();
-        return view('admin.dashboard', compact('totalUsers','totalProducts','totalToko','latestProducts'));
+        return view('admin.dashboard', compact('totalUsers','totalProducts','totalToko','latestProducts','totalKategori'));
 
     }
 }
