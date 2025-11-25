@@ -245,11 +245,28 @@
     </div>
 
 
-    <footer>
-        <h2>Marketplace Sekolah</h2>
-        <p>Media jual beli produk kreativitas siswa yang aman dan terpercaya.</p>
-        <p style="margin-top:15px;">© 2025 Marketplace Sekolah — All Rights Reserved</p>
-    </footer>
+    <footer style="background-color:#1f2937; color:#e5e7eb; padding:40px 20px; text-align:center; font-family:Arial, sans-serif;">
+    <h2 style="margin-bottom:10px;">Marketplace Sekolah</h2>
+    <p style="margin-bottom:20px;">Media jual beli produk kreativitas siswa yang aman dan terpercaya.</p>
+
+
+    <div style="margin-bottom:20px;">
+        <a href="#" style="color:#fbbf24; margin:0 10px; text-decoration:none;">Beranda</a>
+        <a href="#" style="color:#fbbf24; margin:0 10px; text-decoration:none;">Kategori</a>
+        <a href="#" style="color:#fbbf24; margin:0 10px; text-decoration:none;">Tentang Kami</a>
+        <a href="#" style="color:#fbbf24; margin:0 10px; text-decoration:none;">Kontak</a>
+    </div>
+
+   
+    <div style="margin-bottom:20px;">
+        <a href="#" style="color:#fbbf24; margin:0 8px; text-decoration:none;">Facebook</a>
+        <a href="#" style="color:#fbbf24; margin:0 8px; text-decoration:none;">Instagram</a>
+        <a href="#" style="color:#fbbf24; margin:0 8px; text-decoration:none;">Twitter</a>
+    </div>
+
+    <p style="font-size:14px; margin-top:15px;">© 2025 Marketplace Sekolah — All Rights Reserved</p>
+</footer>
+
 
 </body>
 </html>
