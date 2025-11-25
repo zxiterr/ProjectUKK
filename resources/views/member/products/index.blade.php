@@ -3,18 +3,37 @@
     <h3 style="font-weight:700; margin-bottom:10px;">Produk Saya</h3>
     <p style="color:#64748b; margin-top:-5px;">Daftar produk yang anda tambahkan.</p>
 
-    <a href="{{ route('member.products.create') }}"
-       style="
-           display:inline-block;
-           background:#4a00e0;
-           color:white;
-           padding:10px 18px;
-           border-radius:10px;
-           font-weight:600;
-           text-decoration:none;
-           margin-bottom:20px;">
-        + Tambah Produk
-    </a>
+    <!-- TOMBOL KEMBALI + TAMBAH PRODUK -->
+    <div style="margin-bottom:20px; display:flex; gap:10px;">
+
+        <a href="{{ route('member.dashboard') }}"
+           style="
+               display:inline-block;
+               background:#6b7280;
+               color:white;
+               padding:10px 18px;
+               border-radius:10px;
+               font-weight:600;
+               text-decoration:none;
+           ">
+            ← Kembali
+        </a>
+
+        <a href="{{ route('member.products.create') }}"
+           style="
+               display:inline-block;
+               background:#4a00e0;
+               color:white;
+               padding:10px 18px;
+               border-radius:10px;
+               font-weight:600;
+               text-decoration:none;
+           ">
+            + Tambah Produk
+        </a>
+
+    </div>
+  
 
     <div style="
         background:white;

@@ -57,7 +57,7 @@
         outline: none;
     }
 
-    /* Tombol sejajar */
+    
     .btn-row {
         display: flex;
         gap: 10px;

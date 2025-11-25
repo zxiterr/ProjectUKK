@@ -91,7 +91,7 @@
                 <tr>
                     <th>Nama</th>
                     <th>Harga</th>
-                    <th>Kategori</th>   <!-- DITAMBAHKAN -->
+                    <th>Kategori</th>   
                     <th>Gambar</th>
                 </tr>
             </thead>
@@ -102,7 +102,7 @@
                     <td>{{ $product->name }}</td>
                     <td>Rp {{ number_format($product->price) }}</td>
 
-                    {{-- KATEGORI --}}
+
                     <td>
                         @if($product->category)
                             {{ $product->category->name }}

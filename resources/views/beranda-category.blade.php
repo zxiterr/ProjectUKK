@@ -62,7 +62,7 @@
         <div class="grid">
             @forelse ($products as $product)
                 <div class="card">
-                    <img src="{{ asset('storage/' . $product->image) }}">
+                    <img src="/uploads/products/{{ $product->image }}" width="80" style="border-radius:8px; border:1px solid #ddd;">
                     <h4>{{ $product->name }}</h4>
                     <p>Rp {{ number_format($product->price) }}</p>
                 </div>

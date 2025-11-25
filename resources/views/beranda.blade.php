@@ -21,7 +21,7 @@
             color: var(--text-light);
         }
 
-        /* NAVBAR */
+
         .navbar {
             background: #fff;
             padding: 12px 35px;
@@ -54,7 +54,7 @@
             color: var(--primary);
         }
 
-        /* DROPDOWN */
+
         .dropdown {
             position: relative;
         }
@@ -68,7 +68,7 @@
             display: none;
         }
 
-        /* HERO */
+
         .hero {
             background: #1f2937;
             padding: 35px 20px;
@@ -81,7 +81,7 @@
             font-size: 28px;
         }
 
-        /* PRODUCTS */
+
         .product-section {
             padding: 25px 30px;
         }
@@ -125,7 +125,7 @@
             text-decoration: none;
         }
 
-        
+
         footer {
             background: #111827;
             padding: 35px;
@@ -140,32 +140,59 @@
 <body>
 
     <div class="navbar">
-        <h2>Zschool</h2>
+    <h2>Zschool</h2>
 
-        <div class="navbar-menu">
+    <div class="navbar-menu">
 
+        <a href="{{ url('/') }}" class="navlink">Beranda</a>
 
+        <div class="dropdown">
+            <a class="navlink" style="cursor:pointer;">Category ▼</a>
 
-            <a href="{{ url('/') }}" class="navlink">Beranda</a>
-
-
-            <div class="dropdown">
-                <a class="navlink" style="cursor:pointer;">Category ▼</a>
-
-                <div class="dropdown-menu">
-                    @foreach ($categories as $c)
-                        <a href="{{ route('beranda.category', $c->id) }}"
-                           style="display:block; padding:8px; color:#1f2937; text-decoration:none;">
-                            {{ $c->name }}
-                        </a>
-                    @endforeach
-                </div>
+            <div class="dropdown-menu">
+                @foreach ($categories as $c)
+                    <a href="{{ route('beranda.category', $c->id) }}"
+                       style="display:block; padding:8px; color:#1f2937; text-decoration:none;">
+                        {{ $c->name }}
+                    </a>
+                @endforeach
             </div>
-
-            <a href="{{ url('/tentang-kami') }}" class="navlink">Tentang Toko Kami</a>
-            <a href="{{ route('login') }}" class="navlink" style="color:#3b82f6;">Login</a>
         </div>
+
+        <a href="{{ url('/tentang-kami') }}" class="navlink">Tentang Toko Kami</a>
+        <a href="{{ route('login') }}" class="navlink" style="color:#3b82f6;">Login</a>
+
+
+        <form action="#" method="GET"
+            style="display:flex; align-items:center; margin-left:15px;">
+
+            <input type="text" name="q"
+                placeholder="Cari produk..."
+                style="
+                    padding:6px 10px;
+                    border-radius:6px;
+                    border:1px solid #ccc;
+                    width:160px;
+                ">
+
+            <button type="submit"
+                style="
+                    margin-left:6px;
+                    padding:6px 10px;
+                    background:#3b82f6;
+                    color:white;
+                    border:none;
+                    border-radius:6px;
+                    cursor:pointer;
+                ">
+                <i class="fa fa-search"></i>
+            </button>
+
+        </form>
+
+
     </div>
+</div>
 
 
     <script>
@@ -178,7 +205,7 @@
 
 
     <div class="hero">
-        <h1>Marketplace Sederhana untuk Kreativitas Siswa</h1>
+        <h1>Marketplace Zschool</h1>
     </div>
 
 
@@ -191,12 +218,23 @@
         <div class="product-grid">
             @forelse ($products as $product)
                 <div class="product-card">
-                    <img src="{{ asset('storage/' . $product->image) }}">
+                    <img src="/uploads/products/{{ $product->image }}" width="80" style="border-radius:8px; border:1px solid #ddd;">
 
                     <h3>{{ $product->name }}</h3>
                     <p>Rp {{ number_format($product->price, 0, ',', '.') }}</p>
 
-                    <a href="#" class="btn-detail">Detail</a>
+                    <a href="{{ route('product.detail', $product->id)}}"class=btn-detail
+                    style="
+                     padding:8px 12px;
+                     background:#2563eb;
+                     color:white;
+                     border-radius:6px;
+                     text-decoration:none;
+                      font-size:13px;
+                          ">
+                     Detail
+                       </a>
+
                 </div>
             @empty
                 <p style="grid-column:1/-1; text-align:center; opacity:0.6;">

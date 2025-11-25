@@ -9,6 +9,22 @@
 
     <div style="margin-left:260px; padding:35px;">
 
+
+        <a href="{{ route('member.products.index') }}"
+            style="
+                display:inline-block;
+                margin-bottom:18px;
+                padding:10px 16px;
+                background:#e5e7eb;
+                color:#111827;
+                text-decoration:none;
+                border-radius:8px;
+                font-size:14px;
+                font-weight:600;
+            ">
+            ← Kembali
+        </a>
+
         <h3 style="font-weight:bold; margin-bottom:5px;">Tambah Produk</h3>
         <p style="color:#64748b; margin-top:0;">Silakan isi detail produk baru anda.</p>
 
@@ -38,14 +54,12 @@
                         placeholder="Masukkan harga" required>
                 </div>
 
-                <!-- CATEGORY -->
                 <div style="margin-bottom:18px;">
                     <label style="font-weight:600; display:block; margin-bottom:6px;">Kategori</label>
                     <select name="category_id"
                         style="width:100%; padding:12px; border:1px solid #ccc; border-radius:8px;" required>
 
                         <option value="">-- Pilih Kategori --</option>
-
                         @foreach ($categories as $cat)
                             <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                         @endforeach

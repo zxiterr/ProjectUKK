@@ -48,7 +48,7 @@
         font-weight: 700;
     }
 
-    /* TABLE */
+  
     table {
         width: 100%;
         border-collapse: collapse;

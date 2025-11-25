@@ -14,15 +14,12 @@ use App\Http\Controllers\TokoController;
 use App\Http\Controllers\MemberDashboardController;
 use App\Models\Product;
 
-// ===============================
-// BERANDA
-// ===============================
+
 Route::get('/', function () {
     $products = Product::latest()->get();
     $categories = Category::all();
 
     return view('beranda', compact('products', 'categories'));
-
 
 });
 
@@ -33,9 +30,10 @@ Route::get('/category/{id}', function ($id) {
     return view('beranda-category', compact('products', 'category'));
 })->name('beranda.category');
 
-
-
-
+Route::get('/product/{id}', function ($id) {
+    $product = \App\Models\Product::findOrFail($id);
+    return view('product-detail', compact('product'));
+})->name('product.detail');
 
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -96,28 +94,18 @@ Route::middleware(['auth', 'isMember'])->group(function () {
 
     Route::get('/member/products', [MemberProductController::class, 'index'])
         ->name('member.products.index');
-
-
     Route::get('/member/products/create', [MemberProductController::class, 'create'])
         ->name('member.products.create');
     Route::post('/member/products', [MemberProductController::class, 'store'])
         ->name('member.products.store');
-
-
     Route::get('/member/products/{id}/edit', [MemberProductController::class, 'edit'])
         ->name('member.products.edit');
     Route::put('/member/products/{id}', [MemberProductController::class, 'update'])
         ->name('member.products.update');
-
-
     Route::delete('/member/products/{id}', [MemberProductController::class, 'destroy'])
         ->name('member.products.destroy');
-
-
     Route::get('/member/dashboard', [MemberDashboardController::class, 'index'])
         ->name('member.dashboard');
-
-
     Route::get('/member/riwayat-belanja', [MemberDashboardController::class, 'riwayatBelanja'])
         ->name('member.riwayat');
 });
