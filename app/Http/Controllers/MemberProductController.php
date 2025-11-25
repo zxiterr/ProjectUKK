@@ -16,8 +16,9 @@ class MemberProductController extends Controller
        $products = Product::where('user_id', auth()->id())
                 ->with('category')
                 ->get();
+        $category = Category::all();
 
-    return view('member.products.index', compact('products'));
+    return view('member.products.index', compact('products', 'category'));
     }
 
     /**

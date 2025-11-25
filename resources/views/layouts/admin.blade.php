@@ -24,7 +24,7 @@
             left: 0;
             width: 240px;
             height: 100vh;
-            background: linear-gradient(180deg, #4a00e0, #8e2de2);
+            background: linear-gradient(180deg, #493670, #573079);
             color: white;
             padding: 25px 20px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
@@ -60,14 +60,14 @@
             background: rgba(255,255,255,0.2);
         }
 
-        /* CONTENT WRAPPER */
+
         .admin-content {
             margin-left: 260px;
             padding: 35px;
             max-width: 1200px;
         }
 
-        /* LOGOUT BUTTON */
+
         #logout-form button {
             width: 100%;
             border-radius: 8px;

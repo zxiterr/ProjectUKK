@@ -10,7 +10,7 @@
     <div style="margin-left:260px; padding:35px;">
 
 
-        <a href="{{ route('member.products.index') }}"
+        <a href="{{ route('member.dashboard') }}"
             style="
                 display:inline-block;
                 margin-bottom:18px;

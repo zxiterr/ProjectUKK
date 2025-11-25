@@ -10,7 +10,7 @@
         :root {
             --bg-dark: #1f2137;
             --bg-card: #262b40;
-            --primary: #3b82f6;
+            --primary: #283d5e;
             --text-light: #e5e7eb;
         }
 
@@ -251,17 +251,17 @@
 
 
     <div style="margin-bottom:20px;">
-        <a href="#" style="color:#fbbf24; margin:0 10px; text-decoration:none;">Beranda</a>
-        <a href="#" style="color:#fbbf24; margin:0 10px; text-decoration:none;">Kategori</a>
-        <a href="#" style="color:#fbbf24; margin:0 10px; text-decoration:none;">Tentang Kami</a>
-        <a href="#" style="color:#fbbf24; margin:0 10px; text-decoration:none;">Kontak</a>
+        <a href="#" style="color:#181cf7; margin:0 10px; text-decoration:none;">Beranda</a>
+        <a href="#" style="color:#1f23ff; margin:0 10px; text-decoration:none;">Kategori</a>
+        <a href="#" style="color:#2125ff; margin:0 10px; text-decoration:none;">Tentang Kami</a>
+        <a href="#" style="color:#272bff; margin:0 10px; text-decoration:none;">Kontak</a>
     </div>
 
-   
+
     <div style="margin-bottom:20px;">
-        <a href="#" style="color:#fbbf24; margin:0 8px; text-decoration:none;">Facebook</a>
-        <a href="#" style="color:#fbbf24; margin:0 8px; text-decoration:none;">Instagram</a>
-        <a href="#" style="color:#fbbf24; margin:0 8px; text-decoration:none;">Twitter</a>
+        <a href="#" style="color:#2b2eff; margin:0 8px; text-decoration:none;">Facebook</a>
+        <a href="#" style="color:#373aff; margin:0 8px; text-decoration:none;">Instagram</a>
+        <a href="#" style="color:#4346ff; margin:0 8px; text-decoration:none;">Twitter</a>
     </div>
 
     <p style="font-size:14px; margin-top:15px;">© 2025 Marketplace Sekolah — All Rights Reserved</p>
