@@ -8,25 +8,21 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    // ===========================
-    // ADMIN & MEMBER → Lihat produk
-    // ===========================
+
     public function index()
     {
-        // admin lihat semua produk
+       
         if (Auth::user()->role === 'admin') {
             $products = Product::latest()->paginate(10);
         } else {
-            // member hanya lihat produk dia sendiri
+
             $products = Product::where('user_id', Auth::id())->latest()->paginate(10);
         }
 
         return view('admin.products.index', compact('products'));
     }
 
-    // ===========================
-    // HANYA MEMBER → Form tambah
-    // ===========================
+
     public function create()
     {
         if (Auth::user()->role !== 'member') {
@@ -36,9 +32,7 @@ class ProductController extends Controller
         return view('admin.products.create');
     }
 
-    // ===========================
-    // HANYA MEMBER → Simpan produk
-    // ===========================
+
     public function store(Request $request)
     {
         if (Auth::user()->role !== 'member') {
@@ -60,7 +54,7 @@ class ProductController extends Controller
         }
 
         Product::create([
-            'user_id' => Auth::id(), // 🟢 SIMPAN ID MEMBER
+            'user_id' => Auth::id(),
             'name' => $request->name,
             'price' => $request->price,
             'description' => $request->description,
@@ -70,9 +64,7 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success','Produk berhasil ditambahkan');
     }
 
-    // ===========================
-    // HANYA MEMBER → Edit produk miliknya
-    // ===========================
+
     public function edit(Product $product)
     {
         if (Auth::id() !== $product->user_id) {
@@ -82,9 +74,7 @@ class ProductController extends Controller
         return view('admin.products.edit', compact('product'));
     }
 
-    // ===========================
-    // HANYA MEMBER → Update produk miliknya
-    // ===========================
+
     public function update(Request $request, Product $product)
     {
         if (Auth::id() !== $product->user_id) {
@@ -114,9 +104,7 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success','Produk berhasil diperbarui');
     }
 
-    // ===========================
-    // HANYA MEMBER → Hapus produk miliknya
-    // ===========================
+
     public function destroy(Product $product)
     {
         if (Auth::id() !== $product->user_id) {

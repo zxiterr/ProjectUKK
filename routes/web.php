@@ -13,6 +13,7 @@ use App\Http\Controllers\TentangKamiController;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\MemberDashboardController;
 use App\Models\Product;
+use App\Http\Controllers\CartController;
 
 
 Route::get('/', function () {
@@ -108,5 +109,14 @@ Route::middleware(['auth', 'isMember'])->group(function () {
         ->name('member.dashboard');
     Route::get('/member/riwayat-belanja', [MemberDashboardController::class, 'riwayatBelanja'])
         ->name('member.riwayat');
+
+
+
+
+
+
+
+
+
 });
 
